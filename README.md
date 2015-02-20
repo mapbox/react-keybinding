@@ -56,10 +56,25 @@ keybindings: {
   // keys are strings: they can contain meta and shift symbols,
   // numbers, strings, etc
   '⌘S': function(e) {
-    // bindings can map to functions that they call directlyj
+    // bindings can map to functions that they call directly
   },
   // or to constants that are passed to the component's
   // 'keybinding' method.
   '⌘C': 'COPY'
 }
+```
+
+## Tests
+
+```sh
+$ npm test
+```
+
+## Example
+
+```sh
+$ npm install
+$ cd example
+$ npm install
+$ npm start
 ```
