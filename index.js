@@ -4,20 +4,19 @@ var parseEvents = require('./src/parse_events.js'),
 
 var Keybinding = {
   childContextTypes: {
-    __keybindings: React.PropTypes.object
+    __keybindings: React.PropTypes.array
   },
   contextTypes: {
-    __keybindings: React.PropTypes.object
+    __keybindings: React.PropTypes.array
   },
   getChildContext: function() {
     return {
-      __keybindings: this.__getKeybinds()
+      __keybindings: this.__getKeybindings()
     };
   },
   __getKeybindings: function() {
     this.__keybindings = this.__keybindings ||
-      (this.context && this.context.__keybindings) ||
-      { bindings: [] };
+      (this.context && this.context.__keybindings) || [];
     return this.__keybindings;
   },
   getAllKeybindings: function() {
@@ -41,12 +40,12 @@ var Keybinding = {
   componentDidMount: function() {
     this.matchers = parseEvents(this.keybindings || {});
     window.addEventListener('keydown', this.__keybinding);
-    this.getKeybindings().push(this.keybindings);
+    this.__getKeybindings().push(this.keybindings);
   },
   componentWillUnmount: function() {
     window.removeEventListener('keydown', this.__keybinding);
-    this.getKeybindings()
-      .splice(this.getKeybindings().indexOf(this.keybindings), 1);
+    this.__getKeybindings()
+      .splice(this.__getKeybindings().indexOf(this.keybindings), 1);
   }
 };
 
