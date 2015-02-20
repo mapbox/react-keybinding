@@ -1,0 +1,18 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo index.js --outfile bundle.js --verbose --live"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "budo": "^0.1.12",
+    "watchify": "^2.3.0"
+  },
+  "dependencies": {
+    "react": "^0.12.2"
+  }
+}

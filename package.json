@@ -1,0 +1,19 @@
+{
+  "name": "react-keybinding",
+  "version": "1.0.0",
+  "description": "declarative, concise keybindings for react",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "keywords": [
+    "keybinding",
+    "keybindings",
+    "react"
+  ],
+  "author": "Tom MacWright",
+  "license": "BSD",
+  "devDependencies": {
+    "tape": "^3.5.0"
+  }
+}
