@@ -9,7 +9,8 @@
   "keywords": [
     "keybinding",
     "keybindings",
-    "react"
+    "react",
+    "react-component"
   ],
   "author": "Tom MacWright",
   "license": "BSD",
