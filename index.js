@@ -40,11 +40,11 @@ var Keybinding = {
   },
   componentDidMount: function() {
     this.matchers = parseEvents(this.keybindings || {});
-    window.addEventListener('keydown', this.__keybinding);
+    document.addEventListener('keydown', this.__keybinding);
     this.__getKeybindings().push(this.keybindings);
   },
   componentWillUnmount: function() {
-    window.removeEventListener('keydown', this.__keybinding);
+    document.removeEventListener('keydown', this.__keybinding);
     this.__getKeybindings()
       .splice(this.__getKeybindings().indexOf(this.keybindings), 1);
   }

@@ -69,7 +69,7 @@ if (process.browser) {
     var hello_message = TestUtils.renderIntoDocument(
       React.createElement(HelloMessage));
 
-    happen.once(window, {
+    happen.once(document, {
       type: 'keydown',
       keyCode: 67
     });
@@ -93,7 +93,7 @@ if (process.browser) {
     var hello_message = TestUtils.renderIntoDocument(
       React.createElement(HelloMessage));
 
-    happen.once(window, {
+    happen.once(document, {
       type: 'keydown',
       keyCode: 67,
       metaKey: true
