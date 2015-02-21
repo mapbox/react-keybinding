@@ -45,3 +45,86 @@ test('parseEvents', function(t) {
     }], 'a');
     t.end();
 });
+
+var React = require('react/addons'),
+    happen = require('happen'),
+    TestUtils = React.addons.TestUtils;
+var Keybinding = require('./');
+
+if (process.browser) {
+
+  test('Keybinding: action', function(t) {
+    var HelloMessage = React.createClass({
+      mixins: [Keybinding],
+      keybindings: { 'C': 'COPY' },
+      keybinding: function(event, action) {
+        t.equal(action, 'COPY');
+        t.equal(typeof event, 'object');
+        hello_message.componentWillUnmount();
+        t.end();
+      },
+      render: function() { return React.createElement('div', null); }
+    });
+
+    var hello_message = TestUtils.renderIntoDocument(
+      React.createElement(HelloMessage));
+
+    happen.once(document, {
+      type: 'keydown',
+      keyCode: 67
+    });
+  });
+
+  test('Keybinding: action with meta', function(t) {
+    var HelloMessage = React.createClass({
+      mixins: [Keybinding],
+      keybindings: { 'cmd+C': 'COPY' },
+      keybinding: function(event, action) {
+        t.equal(action, 'COPY');
+        t.equal(typeof event, 'object');
+        t.deepEqual(this.getAllKeybindings(), [{ 'cmd+C': 'COPY' }], 'getAllKeybindings');
+        hello_message.componentWillUnmount();
+        t.deepEqual(this.getAllKeybindings(), [], 'getAllKeybindings after unmount');
+        t.end();
+      },
+      render: function() { return React.createElement('div', null); }
+    });
+
+    var hello_message = TestUtils.renderIntoDocument(
+      React.createElement(HelloMessage));
+
+    happen.once(document, {
+      type: 'keydown',
+      keyCode: 67,
+      metaKey: true
+    });
+  });
+
+  test('Keybinding: ?', function(t) {
+    var HelloMessage = React.createClass({
+      mixins: [Keybinding],
+      keybindings: { '?': function() { t.pass(); t.end();  } },
+      render: function() { return React.createElement('div', null); }
+    });
+
+    var hello_message = TestUtils.renderIntoDocument(
+      React.createElement(HelloMessage));
+
+    happen.once(document, { type: 'keydown', keyCode: 63, });
+  });
+
+} else {
+
+  test('headless', function(t) {
+    var HelloMessage = React.createClass({
+      mixins: [Keybinding],
+      keybindings: { 'C': 'COPY' },
+      keybinding: function(event, action) {
+      },
+      render: function() { return React.createElement('div', null); }
+    });
+    t.ok(React.renderToString(React.createElement(HelloMessage)));
+    t.end();
+  });
+
+}
