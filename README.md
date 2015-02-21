@@ -5,6 +5,8 @@
 Declarative, lightweight, and robust keybindings mixin for React.
 
 * Straightforward `'⌘S'` string syntax for declaring bindings
+* Automatically binds & unbinds keybindings when components mount and unmount
+* Allows listing of all currently-active keybindings
 * Run a function when a keybinding is hit or pass an action
   to the `keybinding` method of that component
 * Doesn't fire keybindings accidentally triggered in inputs,
@@ -64,6 +66,9 @@ keybindings: {
   '⌘C': 'COPY'
 }
 ```
+
+The mixin provides a method for components called `.getAllKeybindings()`:
+this yields an array of all `keybindings` properties on all active components.
 
 ## [Syntax](SYNTAX.md)
 
