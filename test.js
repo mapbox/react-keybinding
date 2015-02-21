@@ -15,6 +15,8 @@ test('parseCode', function(t) {
         altKey: false, ctrlKey: false, keyCode: 65, metaKey: false, shiftKey: true }, 'shift a');
     t.deepEqual(parseCode('⎋'), {
         altKey: false, ctrlKey: false, keyCode: 27, metaKey: false, shiftKey: false }, 'escape');
+    t.deepEqual(parseCode('?'), {
+        altKey: false, ctrlKey: false, keyCode: 191, metaKey: false, shiftKey: true }, '?');
     t.end();
 });
 
@@ -110,7 +112,7 @@ if (process.browser) {
     var hello_message = TestUtils.renderIntoDocument(
       React.createElement(HelloMessage));
 
-    happen.once(document, { type: 'keydown', keyCode: 63, });
+    happen.once(document, { type: 'keydown', keyCode: 191, shiftKey: true });
   });
 
 } else {

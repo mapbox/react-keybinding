@@ -28,6 +28,9 @@ module.exports = function parseCode(input) {
 
         if (code[i] in codes.modifierCodes) {
             event[codes.modifierProperties[codes.modifierCodes[code[i]]]] = true;
+        } else if (code[i] in codes.shiftedKeys) {
+            event.keyCode = codes.shiftedKeys[code[i]];
+            event.shiftKey = true;
         } else if (code[i] in codes.keyCodes) {
             event.keyCode = codes.keyCodes[code[i]];
         }

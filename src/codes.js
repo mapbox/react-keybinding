@@ -106,7 +106,32 @@ while (++i < 136) {
 }
 
 // ;-a-z
-i = 58;
+i = 63;
 while (++i < 91) {
     module.exports.keyCodes[String.fromCharCode(i).toLowerCase()] = i;
 }
+
+module.exports.shiftedKeys = {};
+
+// these non-letter keys imply a shift key on US keyboards
+[[ '~', '`' ],
+ [ '!', '1' ],
+ [ '@', '2' ],
+ [ '#', '3' ],
+ [ '$', '4' ],
+ [ '%', '5' ],
+ [ '^', '6' ],
+ [ '&', '7' ],
+ [ '*', '8' ],
+ [ '(', '9' ],
+ [ ')', '0' ],
+ [ '_', '-' ],
+ [ '+', '=' ],
+ [ ':', ';' ],
+ [ '\"', '\'' ],
+ [ '<', ',' ],
+ [ '>', '.' ],
+ [ '?', '/' ]
+].forEach(function(key) {
+  module.exports.shiftedKeys[key[0]] = module.exports.keyCodes[key[1]];
+});
