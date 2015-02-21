@@ -1,6 +1,7 @@
-var parseEvents = require('./src/parse_events.js'),
-    isInput = require('./src/is_input.js'),
-    match = require('./src/match.js');
+var React = require('react'),
+  parseEvents = require('./src/parse_events.js'),
+  isInput = require('./src/is_input.js'),
+  match = require('./src/match.js');
 
 var Keybinding = {
   childContextTypes: {
