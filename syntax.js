@@ -1,6 +1,10 @@
 var fs = require('fs');
 var codes = require('./src/codes');
 
+/**
+ * This file generates the file SYNTAX.md, which lists
+ * all of the available key combinations supported by this mixin.
+ */
 function pairs(o) {
   return Object.keys(o).map(function(k) { return [k, o[k]]; });
 }
