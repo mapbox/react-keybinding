@@ -1,5 +1,7 @@
 # react-keybinding
 
+[![build status](https://secure.travis-ci.org/mapbox/react-keybinding.png)](http://travis-ci.org/mapbox/react-keybinding)
+
 Declarative, lightweight, and robust keybindings mixin for React.
 
 * Straightforward `'⌘S'` string syntax for declaring bindings
