@@ -9,7 +9,6 @@ Declarative, lightweight, and robust keybindings mixin for React.
   to the `keybinding` method of that component
 * Doesn't fire keybindings accidentally triggered in inputs,
   select boxes, or textareas.
-* Dependency-free
 
 ## Installation
 
@@ -65,6 +64,10 @@ keybindings: {
   '⌘C': 'COPY'
 }
 ```
+
+## [Syntax](SYNTAX.md)
+
+The full [range of codes and modifiers supported is listed in SYNTAX.md](SYNTAX.md).
 
 ## Tests
 
