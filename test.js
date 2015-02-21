@@ -100,6 +100,19 @@ if (process.browser) {
     });
   });
 
+  test('Keybinding: ?', function(t) {
+    var HelloMessage = React.createClass({
+      mixins: [Keybinding],
+      keybindings: { '?': function() { t.pass(); t.end();  } },
+      render: function() { return React.createElement('div', null); }
+    });
+
+    var hello_message = TestUtils.renderIntoDocument(
+      React.createElement(HelloMessage));
+
+    happen.once(document, { type: 'keydown', keyCode: 63, });
+  });
+
 } else {
 
   test('headless', function(t) {

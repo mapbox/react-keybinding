@@ -105,8 +105,8 @@ while (++i < 136) {
     module.exports.keyCodes['f' + n] = i; ++n;
 }
 
-// a-z
-i = 64;
+// ;-a-z
+i = 58;
 while (++i < 91) {
     module.exports.keyCodes[String.fromCharCode(i).toLowerCase()] = i;
 }
