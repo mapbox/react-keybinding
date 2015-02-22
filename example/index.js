@@ -15,9 +15,8 @@ var HelloMessage = React.createClass({
     // action is 'COPY'
     console.log(arguments);
   },
-  displayName: "HelloMessage",
   render: function() {
-    return React.createElement("div", null, "Hello ", this.props.name);
+    return React.createElement("div", null, "Hello");
   }
 });
 

@@ -4,8 +4,8 @@
   "description": "declarative, concise keybindings for react",
   "main": "index.js",
   "scripts": {
-    "test-ff": "browserify test.js | tap-closer | smokestack -b firefox",
-    "test": "browserify test.js | tap-closer | smokestack"
+    "test-ff": "node test.js && browserify test.js | tap-closer | smokestack -b firefox",
+    "test": "node test.js && browserify test.js | tap-closer | smokestack"
   },
   "keywords": [
     "keybinding",

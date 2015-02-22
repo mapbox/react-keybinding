@@ -21,6 +21,14 @@ pairs(codes.keyCodes).forEach(function(pair) {
   out.write('| `` ' + pair[0] + ' `` | ' + pair[1] + ' |\n');
 });
 
+out.write('\n\n## shift key combinations\n\n');
+out.write('| input | keyCode |\n');
+out.write('|------------|------------------|\n');
+
+pairs(codes.shiftedKeys).forEach(function(pair) {
+  out.write('| `` ' + pair[0] + ' `` | shift + ' + pair[1] + ' |\n');
+});
+
 out.write('\n\n## modifiers\n\n');
 out.write('| input | keyCode |\n');
 out.write('|------------|------------------|\n');
