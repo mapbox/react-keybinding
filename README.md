@@ -47,6 +47,18 @@ var HelloMessage = React.createClass({
 React.render(React.createElement(HelloMessage, {name: "John"}), document.body);
 ```
 
+There's a runnable example in the `./examples` directory: to run it,
+
+```sh
+$ npm install
+$ cd example
+$ npm install
+$ npm start
+```
+
+See [tmcw/ditty](https://github.com/tmcw/ditty) for an example of
+react-keybinding in an application.
+
 ### API
 
 This module exposes a single mixin called `Keybinding`.
@@ -80,11 +92,4 @@ The full [range of codes and modifiers supported is listed in SYNTAX.md](SYNTAX.
 $ npm test
 ```
 
-## Example
 
-```sh
-$ npm install
-$ cd example
-$ npm install
-$ npm start
-```
