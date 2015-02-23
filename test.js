@@ -115,6 +115,19 @@ if (process.browser) {
     happen.once(document, { type: 'keydown', keyCode: 191, shiftKey: true });
   });
 
+  test('Keybinding: none by myself', function(t) {
+    var HelloMessage = React.createClass({
+      mixins: [Keybinding],
+      componentDidMount: function() {
+        t.deepEqual(this.getAllKeybindings(), []);
+        t.end();
+      },
+      render: function() { return React.createElement('div', null); }
+    });
+    var hello_message = TestUtils.renderIntoDocument(
+      React.createElement(HelloMessage));
+  });
+
 } else {
 
   test('headless', function(t) {

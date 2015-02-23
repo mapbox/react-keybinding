@@ -62,9 +62,11 @@ var Keybinding = {
    * add our keybindings to the global index.
    */
   componentDidMount: function() {
-    this.matchers = parseEvents(this.keybindings || {});
-    document.addEventListener('keydown', this.__keybinding);
-    this.__getKeybindings().push(this.keybindings);
+    if (this.keybindings !== undefined) {
+      this.matchers = parseEvents(this.keybindings);
+      document.addEventListener('keydown', this.__keybinding);
+      this.__getKeybindings().push(this.keybindings);
+    }
   },
 
   /**
@@ -72,9 +74,11 @@ var Keybinding = {
    * remove our keybindings from the global index.
    */
   componentWillUnmount: function() {
-    document.removeEventListener('keydown', this.__keybinding);
-    this.__getKeybindings()
-      .splice(this.__getKeybindings().indexOf(this.keybindings), 1);
+    if (this.keybindings !== undefined) {
+      document.removeEventListener('keydown', this.__keybinding);
+      this.__getKeybindings()
+        .splice(this.__getKeybindings().indexOf(this.keybindings), 1);
+    }
   }
 };
 
