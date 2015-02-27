@@ -57,18 +57,20 @@ if (process.browser) {
 
   test('Keybinding: action', function(t) {
     var HelloMessage = React.createClass({
-      mixins: [Keybinding],
-      keybindings: { 'C': 'COPY' },
       keybinding: function(event, action) {
         t.equal(action, 'COPY');
         t.equal(typeof event, 'object');
-        hello_message.componentWillUnmount();
+        helloMessage.componentWillUnmount();
         t.end();
       },
-      render: function() { return React.createElement('div', null); }
+      render: function() {
+        return React.createElement(Keybinding, {
+          keys: { C: 'COPY' }
+        });
+      }
     });
 
-    var hello_message = TestUtils.renderIntoDocument(
+    var helloMessage = TestUtils.renderIntoDocument(
       React.createElement(HelloMessage));
 
     happen.once(document, {
@@ -79,7 +81,6 @@ if (process.browser) {
 
   test('Keybinding: action with meta', function(t) {
     var HelloMessage = React.createClass({
-      mixins: [Keybinding],
       keybindings: { 'cmd+C': 'COPY' },
       keybinding: function(event, action) {
         t.equal(action, 'COPY');
@@ -132,11 +133,12 @@ if (process.browser) {
 
   test('headless', function(t) {
     var HelloMessage = React.createClass({
-      mixins: [Keybinding],
       keybindings: { 'C': 'COPY' },
       keybinding: function(event, action) {
       },
-      render: function() { return React.createElement('div', null); }
+      render: function() { return React.createElement(Keybinding, {
+        C: 'COPY'
+      }); }
     });
     t.ok(React.renderToString(React.createElement(HelloMessage)));
     t.end();

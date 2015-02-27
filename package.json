@@ -25,5 +25,8 @@
   },
   "peerDependencies": {
     "react": "0.12.x"
+  },
+  "dependencies": {
+    "react-side-effect": "^0.3.0"
   }
 }
