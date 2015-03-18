@@ -4,7 +4,7 @@ var codes = require('./codes.js');
  * parse a key code given as a string
  * into an object of expectations used
  * to match keystrokes.
- * @param {String} input
+ * @param {String} input a string of a keycode combination
  * @returns {Object} expectations
  * @example
  * parseCode('a');

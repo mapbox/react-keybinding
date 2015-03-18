@@ -1,6 +1,15 @@
 var test = require('tape');
 
+var formatCode = require('./src/format_code.js');
 var parseCode = require('./src/parse_code.js');
+
+test('formatCode', function(t) {
+    t.deepEqual(formatCode(parseCode('shift')), ['⇧'], 'shift');
+    t.deepEqual(formatCode(parseCode('shift+a')), ['⇧', 'a'], 'modifier and char');
+    t.deepEqual(formatCode(parseCode('shift+cmd')), ['⇧', '⌘'], 'multiple modifiers');
+    t.deepEqual(formatCode(parseCode('arrow-up')), ['↑'], 'longcode');
+    t.end();
+});
 
 test('parseCode', function(t) {
     t.deepEqual(parseCode('a'), {
