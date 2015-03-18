@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test-ff": "node test.js && browserify test.js | tap-closer | smokestack -b firefox",
-    "test": "node test.js && browserify test.js | tap-closer | smokestack"
+    "test": "browserify test.js | tap-closer | smokestack"
   },
   "keywords": [
     "keybinding",
@@ -23,7 +23,7 @@
     "tap-closer": "^1.0.0",
     "tape": "^3.5.0"
   },
-  "peerDependencies": {
-    "react": "0.12.x"
+  "dependencies": {
+    "react": "^0.12.0"
   }
 }
