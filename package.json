@@ -25,5 +25,9 @@
   },
   "dependencies": {
     "react": "^0.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mapbox/react-keybinding.git"
   }
 }
