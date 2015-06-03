@@ -63,7 +63,7 @@ var Keybinding = {
    */
   componentDidMount: function() {
     if (this.keybindings !== undefined) {
-      this.matchers = parseEvents(this.keybindings);
+      this.matchers = parseEvents(this.keybindings, !!this.keybindingsPlatformAgnostic);
       document.addEventListener('keydown', this.__keybinding);
       this.__getKeybindings().push(this.keybindings);
     }

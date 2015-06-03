@@ -57,6 +57,50 @@ test('parseEvents', function(t) {
     t.end();
 });
 
+test('parseEvents platformAgnostic', function(t) {
+    t.deepEqual(parseEvents({'a':'b'}, true), [{
+      expectation: {
+        altKey: false, ctrlKey: false, keyCode: 65, metaKey: false, shiftKey: false
+      },
+      action: 'b'
+    }], 'ignore neither cmd nor ctrl');
+    t.deepEqual(parseEvents({'cmd+a':'b'}, true), [
+      {
+        expectation: {
+          altKey: false, ctrlKey: false, keyCode: 65, metaKey: true, shiftKey: false
+        },
+        action: 'b'
+      },
+      {
+        expectation: {
+          altKey: false, ctrlKey: true, keyCode: 65, metaKey: false, shiftKey: false
+        },
+        action: 'b'
+      }
+    ], 'convert cmd to ctrl');
+    t.deepEqual(parseEvents({'ctrl+a':'b'}, true), [
+      {
+        expectation: {
+          altKey: false, ctrlKey: true, keyCode: 65, metaKey: false, shiftKey: false
+        },
+        action: 'b'
+      },
+      {
+        expectation: {
+          altKey: false, ctrlKey: false, keyCode: 65, metaKey: true, shiftKey: false
+        },
+        action: 'b'
+      }
+    ], 'convert ctrl to cmd');
+    t.deepEqual(parseEvents({'cmd+ctrl+a':'b'}, true), [{
+      expectation: {
+        altKey: false, ctrlKey: true, keyCode: 65, metaKey: true, shiftKey: false
+      },
+      action: 'b'
+    }], 'ignore both cmd and ctrl');
+    t.end();
+});
+
 var React = require('react/addons'),
     happen = require('happen'),
     TestUtils = React.addons.TestUtils;
