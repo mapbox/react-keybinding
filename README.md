@@ -11,6 +11,7 @@ Declarative, lightweight, and robust keybindings mixin for React.
   to the `keybinding` method of that component
 * Doesn't fire keybindings accidentally triggered in inputs,
   select boxes, or textareas.
+* Optionally coerce platform specific keybindings (i.e. `'⌘S'` on Mac to `'^S'` on Windows)
 
 ## Installation
 
@@ -29,6 +30,7 @@ var React = require('react'),
     Keybinding = require('../');
 var HelloMessage = React.createClass({
   mixins: [Keybinding],
+  keybindingsPlatformAgnostic: true,
   keybindings: {
     '⌘S': function(e) {
       console.log('save!');
@@ -79,6 +81,16 @@ keybindings: {
 }
 ```
 
+Platform agnostic keybindings will automatically listen for the `'Ctrl'`
+equivalent of `'Cmd'` keybindings, and vice-versa. To automatically coerce
+platform specific keybindings, provide a property called
+`keybindingsPlatformAgnostic` of the format:
+
+```js
+keybindingsPlatformAgnostic: true,
+keybindings: { ... }
+```
+
 The mixin provides a method for components called `.getAllKeybindings()`:
 this yields an array of all `keybindings` properties on all active components.
 
@@ -91,5 +103,3 @@ The full [range of codes and modifiers supported is listed in SYNTAX.md](SYNTAX.
 ```sh
 $ npm test
 ```
-
-
