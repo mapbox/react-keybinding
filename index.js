@@ -64,7 +64,8 @@ var Keybinding = {
   componentDidMount: function() {
     if (this.keybindings !== undefined) {
       this.matchers = parseEvents(this.keybindings, !!this.keybindingsPlatformAgnostic);
-      document.addEventListener('keydown', this.__keybinding);
+      this.__boundKeybinding = this.__keybinding.bind(this);
+      document.addEventListener('keydown', this.__boundKeybinding);
       this.__getKeybindings().push(this.keybindings);
     }
   },
@@ -74,8 +75,8 @@ var Keybinding = {
    * remove our keybindings from the global index.
    */
   componentWillUnmount: function() {
-    if (this.keybindings !== undefined) {
-      document.removeEventListener('keydown', this.__keybinding);
+    if (this.keybindings !== undefined && this.__boundKeybinding !== undefined) {
+      document.removeEventListener('keydown', this.__boundKeybinding);
       this.__getKeybindings()
         .splice(this.__getKeybindings().indexOf(this.keybindings), 1);
     }
