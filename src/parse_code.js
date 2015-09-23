@@ -15,7 +15,7 @@ module.exports = function parseCode(input) {
         .match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
 
     var event = {
-        keyCode: 0,
+        keyCode: null,
         shiftKey: false,
         ctrlKey: false,
         altKey: false,
