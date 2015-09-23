@@ -137,7 +137,6 @@ module.exports.unshiftedKeys = shiftEquivalents.reduce(function(memo, key) {
   return memo;
 }, {});
 
-module.exports.shiftedKeys = {};
 module.exports.shiftedKeys = shiftEquivalents.reduce(function(shiftedKeys, key) {
   shiftedKeys[key[0]] = keyCodes[key[1]];
   return shiftedKeys;
