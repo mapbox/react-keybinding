@@ -1,3 +1,8 @@
+## 2.0.1
+
+* Fix `formatCode` with shifted keys: they now display as the input, like +,
+  rather than the required keys, like shift+=
+
 ## 1.2.0
 
 * Implement keybinding formatter that simplifies and shortens longform
