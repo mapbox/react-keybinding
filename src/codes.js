@@ -21,7 +21,7 @@ module.exports.modifierProperties = {
     91: 'metaKey'
 };
 
-module.exports.keyCodes = {
+var keyCodes = {
     // Backspace key, on Mac: ⌫ (Backspace)
     '⌫': 8, backspace: 8,
     // Tab Key, on Mac: ⇥ (Tab), on Windows ⇥⇥
@@ -89,32 +89,30 @@ module.exports.keyCodes = {
 // NUMPAD 0-9
 var i = 95, n = 0;
 while (++i < 106) {
-    module.exports.keyCodes['num-' + n] = i;
+    keyCodes['num-' + n] = i;
     ++n;
 }
 
 // 0-9
 i = 47; n = 0;
 while (++i < 58) {
-    module.exports.keyCodes[n] = i; ++n;
+    keyCodes[n] = i; ++n;
 }
 
 // F1-F25
 i = 111; n = 1;
 while (++i < 136) {
-    module.exports.keyCodes['f' + n] = i; ++n;
+    keyCodes['f' + n] = i; ++n;
 }
 
 // ;-a-z
 i = 63;
 while (++i < 91) {
-    module.exports.keyCodes[String.fromCharCode(i).toLowerCase()] = i;
+    keyCodes[String.fromCharCode(i).toLowerCase()] = i;
 }
 
-module.exports.shiftedKeys = {};
-
 // these non-letter keys imply a shift key on US keyboards
-[[ '~', '`' ],
+var shiftEquivalents = [[ '~', '`' ],
  [ '!', '1' ],
  [ '@', '2' ],
  [ '#', '3' ],
@@ -132,6 +130,17 @@ module.exports.shiftedKeys = {};
  [ '<', ',' ],
  [ '>', '.' ],
  [ '?', '/' ]
-].forEach(function(key) {
-  module.exports.shiftedKeys[key[0]] = module.exports.keyCodes[key[1]];
-});
+];
+
+module.exports.unshiftedKeys = shiftEquivalents.reduce(function(memo, key) {
+  memo[keyCodes[key[1]]] = key[0];
+  return memo;
+}, {});
+
+module.exports.shiftedKeys = {};
+module.exports.shiftedKeys = shiftEquivalents.reduce(function(shiftedKeys, key) {
+  shiftedKeys[key[0]] = keyCodes[key[1]];
+  return shiftedKeys;
+}, {});
+
+module.exports.keyCodes = keyCodes;

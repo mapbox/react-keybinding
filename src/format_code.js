@@ -31,14 +31,21 @@ var shortest = {
  */
 module.exports = function formatCode(input) {
   var formatted = [];
-  if (input.shiftKey) formatted.push(shortest.modifierCodes[16]);
+  var isShifted = input.keyCode in codes.unshiftedKeys;
+  if (input.shiftKey && !isShifted) {
+    formatted.push(shortest.modifierCodes[16]);
+  }
   if (input.metaKey) formatted.push(shortest.modifierCodes[91]);
   if (input.altKey) formatted.push(shortest.modifierCodes[18]);
   if (input.ctrlKey) formatted.push(shortest.modifierCodes[17]);
 
-  if (input.keyCode !== 0) {
-    var shortCode = shortest.keyCodes[input.keyCode];
-    formatted.push(shortCode ? shortCode : input.keyCode);
+  if (input.keyCode !== null) {
+    if (isShifted) {
+      formatted.push(codes.unshiftedKeys[input.keyCode]);
+    } else {
+      var shortCode = shortest.keyCodes[input.keyCode];
+      formatted.push(shortCode ? shortCode : input.keyCode);
+    }
   }
 
   return formatted;
