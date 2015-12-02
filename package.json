@@ -24,7 +24,7 @@
     "tape": "^3.5.0"
   },
   "dependencies": {
-    "react": "^0.13.0"
+    "react": "^0.14.1"
   },
   "repository": {
     "type": "git",
