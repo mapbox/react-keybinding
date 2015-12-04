@@ -1,3 +1,9 @@
+## 2.1.0
+
+* allow keybinding while focused on an input via keybindingsOnInputs
+* extend support for React 0.14
+* remove dependency on react to peerDependencies
+
 ## 2.0.1
 
 * Fix `formatCode` with shifted keys: they now display as the input, like +,
