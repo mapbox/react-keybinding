@@ -1,3 +1,7 @@
+## 2.1.1
+
+* make 'keybindingsOnInputs' opt-in, the default is again that inputs do not trigger keybindings
+
 ## 2.1.0
 
 * allow keybinding while focused on an input via keybindingsOnInputs
