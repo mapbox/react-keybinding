@@ -24,7 +24,7 @@
     "tape": "^3.5.0"
   },
   "peerDependencies": {
-    "react": "0.13.x || 0.14.x"
+    "react": "0.13.x || 0.14.x || 15.0.x"
   },
   "repository": {
     "type": "git",
