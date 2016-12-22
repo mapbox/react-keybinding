@@ -1,5 +1,5 @@
 {
-  "name": "react-keybinding",
+  "name": "@mapbox/react-keybinding",
   "version": "3.0.0",
   "description": "declarative, concise keybindings for react",
   "main": "index.js",
