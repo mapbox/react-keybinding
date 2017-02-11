@@ -3,7 +3,7 @@
     "react": ">=0.13.0 <16.0.0"
   }, 
   "name": "@mapbox/react-keybinding", 
-  "license": "BSD-2-Clause", 
+  "license": "MIT", 
   "author": "Tom MacWright", 
   "repository": {
     "url": "git@github.com:mapbox/react-keybinding.git", 
