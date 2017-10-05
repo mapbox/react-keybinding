@@ -1,4 +1,4 @@
-var React = require('react'),
+var PropTypes = require('prop-types'),
   parseEvents = require('./src/parse_events.js'),
   isInput = require('./src/is_input.js'),
   match = require('./src/match.js');
@@ -13,10 +13,10 @@ var Keybinding = {
    * currently-active keybinding objects.
    */
   childContextTypes: {
-    __keybindings: React.PropTypes.array
+    __keybindings: PropTypes.array
   },
   contextTypes: {
-    __keybindings: React.PropTypes.array
+    __keybindings: PropTypes.array
   },
   getChildContext: function() {
     return { __keybindings: this.__getKeybindings() };
