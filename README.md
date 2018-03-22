@@ -2,7 +2,7 @@
 
 [![build status](https://secure.travis-ci.org/mapbox/react-keybinding.png)](http://travis-ci.org/mapbox/react-keybinding)
 
-Declarative, lightweight, and robust keybindings mixin for React.
+Declarative, lightweight, and robust keybinding classes for React. Exposes a mixin and higher-order component.
 
 * Straightforward `'⌘S'` string syntax for declaring bindings
 * Automatically binds & unbinds keybindings when components mount and unmount
@@ -20,52 +20,14 @@ projects with either [browserify](http://browserify.org/) or
 [webpack](http://webpack.github.io/).
 
 ```sh
-$ npm install react-keybinding
+$ npm install @mapbox/react-keybinding
 ```
 
-## Example
+## API
 
-```js
-var React = require('react'),
-    Keybinding = require('../');
-var HelloMessage = React.createClass({
-  mixins: [Keybinding],
-  keybindingsPlatformAgnostic: true,
-  keybindings: {
-    '⌘S': function(e) {
-      console.log('save!');
-      e.preventDefault();
-    },
-    '⌘C': 'COPY'
-  },
-  keybinding: function(event, action) {
-    // event is the browser event, action is 'COPY'
-    console.log(arguments);
-  },
-  render: function() {
-    return React.createElement("div", null, "Hello");
-  }
-});
-React.render(React.createElement(HelloMessage, {name: "John"}), document.body);
-```
+### Mixin
 
-There's a runnable example in the `./examples` directory: to run it,
-
-```sh
-$ npm install
-$ cd example
-$ npm install
-$ npm start
-```
-
-See [tmcw/ditty](https://github.com/tmcw/ditty) for an example of
-react-keybinding in an application.
-
-### API
-
-This module exposes a single mixin called `Keybinding`.
-
-Where you use this mixin on Components, it expects a property called
+This module exposes a mixin called `Keybinding`. Where you use this mixin on Components, it expects a property called
 `keybindings` of the format:
 
 ```js
@@ -93,6 +55,54 @@ keybindings: { ... }
 
 The mixin provides a method for components called `.getAllKeybindings()`:
 this yields an array of all `keybindings` properties on all active components.
+
+#### Example
+
+```js
+var React = require('react'),
+    Keybinding = require('../');
+var HelloMessage = React.createClass({
+  mixins: [Keybinding],
+  keybindingsPlatformAgnostic: true,
+  keybindings: {
+    '⌘S': function(e) {
+      console.log('save!');
+      e.preventDefault();
+    },
+    '⌘C': 'COPY'
+  },
+  keybinding: function(event, action) {
+    // event is the browser event, action is 'COPY'
+    console.log(arguments);
+  },
+  render: function() {
+    return React.createElement("div", null, "Hello");
+  }
+});
+React.render(React.createElement(HelloMessage, {name: "John"}), document.body);
+```
+
+There's a runnable example in the `./examples/keybinding` directory: to run it,
+
+```sh
+$ npm install
+$ cd examples/keybinding
+$ npm install
+$ npm start
+```
+
+See [tmcw/ditty](https://github.com/tmcw/ditty) for an example of
+react-keybinding in an application.
+
+### Higher-order component
+
+This module exposes a higher-order component called `withKeybinding`. This function accepts a component as an argument, and returns a wrapped component with the following props:
+* `getAllKeybindings`
+* `getChildContext`
+
+#### Example
+
+Refer to the `.examples/with_keybinding` directory for an example of how to wrap a component in the higher-order keybinding component.
 
 ## [Syntax](SYNTAX.md)
 

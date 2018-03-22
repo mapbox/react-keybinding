@@ -1,5 +1,5 @@
 var fs = require('fs');
-var codes = require('./src/codes');
+var codes = require('./src/helpers/codes');
 
 /**
  * This file generates the file SYNTAX.md, which lists

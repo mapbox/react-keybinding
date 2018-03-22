@@ -1,5 +1,5 @@
 var React = require('react'),
-    Keybinding = require('../');
+    Keybinding = require('../../src/components/keybinding');
 
 var HelloMessage = React.createClass({
   mixins: [Keybinding],
