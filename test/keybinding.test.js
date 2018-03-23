@@ -1,7 +1,12 @@
 var test = require('tape');
-
-var formatCode = require('./src/format_code.js');
-var parseCode = require('./src/parse_code.js');
+var formatCode = require('../src/helpers/format_code.js');
+var parseCode = require('../src/helpers/parse_code.js');
+var match = require('../src/helpers/match.js');
+var parseEvents = require('../src/helpers/parse_events.js');
+var React = require('react/addons');
+var happen = require('happen');
+var TestUtils = React.addons.TestUtils;
+var Keybinding = require('../src/components/keybinding');
 
 test('formatCode', function(t) {
     t.deepEqual(formatCode(parseCode('shift')), ['⇧'], 'shift');
@@ -33,8 +38,6 @@ test('parseCode', function(t) {
     t.end();
 });
 
-var match = require('./src/match.js');
-
 test('match', function(t) {
     t.equal(
         match(
@@ -48,8 +51,6 @@ test('match', function(t) {
         ), false);
     t.end();
 });
-
-var parseEvents = require('./src/parse_events.js');
 
 test('parseEvents', function(t) {
     t.deepEqual(parseEvents({'a':'b'}), [{
@@ -104,11 +105,6 @@ test('parseEvents platformAgnostic', function(t) {
     }], 'ignore both cmd and ctrl');
     t.end();
 });
-
-var React = require('react/addons'),
-    happen = require('happen'),
-    TestUtils = React.addons.TestUtils;
-var Keybinding = require('./');
 
 if (process.browser) {
 

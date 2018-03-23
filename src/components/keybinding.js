@@ -1,7 +1,7 @@
 var React = require('react'),
-  parseEvents = require('./src/parse_events.js'),
-  isInput = require('./src/is_input.js'),
-  match = require('./src/match.js');
+  parseEvents = require('../helpers/parse_events.js'),
+  isInput = require('../helpers/is_input.js'),
+  match = require('../helpers/match.js');
 
 /**
  * A React mixin that provides keybinding support for components
@@ -64,8 +64,7 @@ var Keybinding = {
   componentDidMount: function() {
     if (this.keybindings !== undefined) {
       this.matchers = parseEvents(this.keybindings, !!this.keybindingsPlatformAgnostic);
-      this.__boundKeybinding = this.__keybinding.bind(this);
-      document.addEventListener('keydown', this.__boundKeybinding);
+      document.addEventListener('keydown', this.__keybinding);
       this.__getKeybindings().push(this.keybindings);
     }
   },
@@ -75,8 +74,8 @@ var Keybinding = {
    * remove our keybindings from the global index.
    */
   componentWillUnmount: function() {
-    if (this.keybindings !== undefined && this.__boundKeybinding !== undefined) {
-      document.removeEventListener('keydown', this.__boundKeybinding);
+    if (this.keybindings !== undefined && this.__keybinding !== undefined) {
+      document.removeEventListener('keydown', this.__keybinding);
       this.__getKeybindings()
         .splice(this.__getKeybindings().indexOf(this.keybindings), 1);
     }
