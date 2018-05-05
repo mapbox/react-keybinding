@@ -9,10 +9,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "budo": "^0.1.12",
+    "budo": "^11.2.0",
     "watchify": "^2.3.0"
   },
   "dependencies": {
-    "react": "^0.12.2"
+    "react": "^16.x"
   }
 }
