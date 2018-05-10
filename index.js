@@ -61,8 +61,7 @@ function withKeybindings(WrappedComponent) {
     componentDidMount: function() {
       if (this.props.keybindings !== undefined) {
         this.matchers = parseEvents(this.props.keybindings, !!this.props.keybindingsPlatformAgnostic);
-        this.__boundKeybinding = this.__keybinding.bind(this);
-        document.addEventListener('keydown', this.__boundKeybinding);
+        document.addEventListener('keydown', this.__keybinding);
         this.__getKeybindings().push(this.props.keybindings);
       }
     },
@@ -72,15 +71,15 @@ function withKeybindings(WrappedComponent) {
     * remove our keybindings from the global index.
     */
     componentWillUnmount: function() {
-      if (this.props.keybindings !== undefined && this.__boundKeybinding !== undefined) {
-        document.removeEventListener('keydown', this.__boundKeybinding);
+      if (this.props.keybindings !== undefined && this.__keybinding !== undefined) {
+        document.removeEventListener('keydown', this.__keybinding);
         this.__getKeybindings()
           .splice(this.__getKeybindings().indexOf(this.props.keybindings), 1);
       }
     },
     render: function() {
       const props = Object.assign({}, this.props, {
-        getAllKeybindings: this.getAllKeybindings.bind(this)
+        getAllKeybindings: this.getAllKeybindings
       });
       return  React.createElement(WrappedComponent, props);
     }
