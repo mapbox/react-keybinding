@@ -24,6 +24,7 @@
     "browserify": "^9.0.3",
     "happen": "^0.1.3",
     "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "smokestack": "^3.2.0",
     "tap-closer": "^1.0.0",
     "tape": "^3.5.0"
@@ -32,7 +33,6 @@
   "description": "declarative, concise keybindings for react",
   "dependencies": {
     "create-react-class": "^15.6.3",
-    "prop-types": "^15.6.1",
-    "react-dom": "^16.3.2"
+    "prop-types": "^15.6.1"
   }
 }
