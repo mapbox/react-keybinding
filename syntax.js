@@ -3,7 +3,7 @@ var codes = require('./src/codes');
 
 /**
  * This file generates the file SYNTAX.md, which lists
- * all of the available key combinations supported by this mixin.
+ * all of the available key combinations supported by this HOC.
  */
 function pairs(o) {
   return Object.keys(o).map(function(k) { return [k, o[k]]; });

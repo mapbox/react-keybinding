@@ -2,7 +2,7 @@
 
 [![build status](https://secure.travis-ci.org/mapbox/react-keybinding.png)](http://travis-ci.org/mapbox/react-keybinding)
 
-Declarative, lightweight, and robust keybindings mixin for React.
+Declarative, lightweight, and robust keybindings HOC for React.
 
 * Straightforward `'⌘S'` string syntax for declaring bindings
 * Automatically binds & unbinds keybindings when components mount and unmount
@@ -27,10 +27,10 @@ $ npm install react-keybinding
 
 ```js
 var React = require('react'),
+    ReactDOM = require('react-dom'),
     Keybinding = require('../');
-var HelloMessage = React.createClass({
-  mixins: [Keybinding],
-  keybindingsPlatformAgnostic: true,
+ReactDOM.render(React.createElement(HelloMessage, {
+  name: "John",
   keybindings: {
     '⌘S': function(e) {
       console.log('save!');
@@ -39,14 +39,11 @@ var HelloMessage = React.createClass({
     '⌘C': 'COPY'
   },
   keybinding: function(event, action) {
-    // event is the browser event, action is 'COPY'
+    // event is the browser event
+    // action is 'COPY'
     console.log(arguments);
   },
-  render: function() {
-    return React.createElement("div", null, "Hello");
-  }
-});
-React.render(React.createElement(HelloMessage, {name: "John"}), document.body);
+}), document.body);
 ```
 
 There's a runnable example in the `./examples` directory: to run it,
@@ -63,9 +60,9 @@ react-keybinding in an application.
 
 ### API
 
-This module exposes a single mixin called `Keybinding`.
+This module exposes a single HOC called `withKeybindings`.
 
-Where you use this mixin on Components, it expects a property called
+Where you use this HOC on Components, it expects a prop called
 `keybindings` of the format:
 
 ```js
@@ -91,7 +88,7 @@ keybindingsPlatformAgnostic: true,
 keybindings: { ... }
 ```
 
-The mixin provides a method for components called `.getAllKeybindings()`:
+The HOC provides a method for components called `.getAllKeybindings()`:
 this yields an array of all `keybindings` properties on all active components.
 
 ## [Syntax](SYNTAX.md)

@@ -1,5 +1,5 @@
 var test = require('tape');
-
+var createReactClass = require('create-react-class');
 var formatCode = require('./src/format_code.js');
 var parseCode = require('./src/parse_code.js');
 
@@ -105,28 +105,28 @@ test('parseEvents platformAgnostic', function(t) {
     t.end();
 });
 
-var React = require('react/addons'),
+var React = require('react'),
     happen = require('happen'),
-    TestUtils = React.addons.TestUtils;
-var Keybinding = require('./');
+    TestUtils = require('react-dom/test-utils');
+var withKeybinding = require('./');
 
 if (process.browser) {
 
   test('Keybinding: action', function(t) {
-    var HelloMessage = React.createClass({
-      mixins: [Keybinding],
-      keybindings: { 'C': 'COPY' },
-      keybinding: function(event, action) {
-        t.equal(action, 'COPY');
-        t.equal(typeof event, 'object');
-        hello_message.componentWillUnmount();
-        t.end();
-      },
+    var HelloMessage = withKeybinding(createReactClass({
       render: function() { return React.createElement('div', null); }
-    });
+    }));
 
     var hello_message = TestUtils.renderIntoDocument(
-      React.createElement(HelloMessage));
+      React.createElement(HelloMessage, {
+        keybindings: { 'C': 'COPY' },
+        keybinding: function(event, action) {
+          t.equal(action, 'COPY');
+          t.equal(typeof event, 'object');
+          hello_message.componentWillUnmount();
+          t.end();
+        }
+      }));
 
     happen.once(document, {
       type: 'keydown',
@@ -135,22 +135,22 @@ if (process.browser) {
   });
 
   test('Keybinding: action with meta', function(t) {
-    var HelloMessage = React.createClass({
-      mixins: [Keybinding],
-      keybindings: { 'cmd+C': 'COPY' },
-      keybinding: function(event, action) {
-        t.equal(action, 'COPY');
-        t.equal(typeof event, 'object');
-        t.deepEqual(this.getAllKeybindings(), [{ 'cmd+C': 'COPY' }], 'getAllKeybindings');
-        hello_message.componentWillUnmount();
-        t.deepEqual(this.getAllKeybindings(), [], 'getAllKeybindings after unmount');
-        t.end();
-      },
+    var HelloMessage = withKeybinding(createReactClass({
       render: function() { return React.createElement('div', null); }
-    });
+    }));
 
     var hello_message = TestUtils.renderIntoDocument(
-      React.createElement(HelloMessage));
+      React.createElement(HelloMessage, {
+        keybindings: { 'cmd+C': 'COPY' },
+        keybinding: function(event, action) {
+          t.equal(action, 'COPY');
+          t.equal(typeof event, 'object');
+          t.deepEqual(this.getAllKeybindings(), [{ 'cmd+C': 'COPY' }], 'getAllKeybindings');
+          hello_message.componentWillUnmount();
+          t.deepEqual(this.getAllKeybindings(), [], 'getAllKeybindings after unmount');
+          t.end();
+        }
+      }));
 
     happen.once(document, {
       type: 'keydown',
@@ -160,27 +160,26 @@ if (process.browser) {
   });
 
   test('Keybinding: ?', function(t) {
-    var HelloMessage = React.createClass({
-      mixins: [Keybinding],
-      keybindings: { '?': function() { t.pass(); t.end();  } },
+    var HelloMessage = withKeybinding(createReactClass({
       render: function() { return React.createElement('div', null); }
-    });
+    }));
 
     var hello_message = TestUtils.renderIntoDocument(
-      React.createElement(HelloMessage));
+      React.createElement(HelloMessage, {
+        keybindings: { '?': function() { t.pass(); t.end();  } },
+      }));
 
     happen.once(document, { type: 'keydown', keyCode: 191, shiftKey: true });
   });
 
   test('Keybinding: none by myself', function(t) {
-    var HelloMessage = React.createClass({
-      mixins: [Keybinding],
+    var HelloMessage = withKeybinding(createReactClass({
       componentDidMount: function() {
-        t.deepEqual(this.getAllKeybindings(), []);
+        t.deepEqual(this.props.getAllKeybindings(), []);
         t.end();
       },
       render: function() { return React.createElement('div', null); }
-    });
+    }));
     var hello_message = TestUtils.renderIntoDocument(
       React.createElement(HelloMessage));
   });
@@ -188,14 +187,13 @@ if (process.browser) {
 } else {
 
   test('headless', function(t) {
-    var HelloMessage = React.createClass({
-      mixins: [Keybinding],
-      keybindings: { 'C': 'COPY' },
-      keybinding: function(event, action) {
-      },
+    var HelloMessage = withKeybinding(createReactClass({
       render: function() { return React.createElement('div', null); }
-    });
-    t.ok(React.renderToString(React.createElement(HelloMessage)));
+    }));
+    t.ok(React.renderToString(React.createElement(HelloMessage, {
+      keybindings: { 'C': 'COPY' },
+      keybinding: function(event, action) {}
+    })));
     t.end();
   });
 

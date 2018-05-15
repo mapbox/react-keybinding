@@ -1,3 +1,7 @@
+## 3.0.0
+
+Remove mixin in favor of HOC.
+
 ## 2.1.1
 
 * make 'keybindingsOnInputs' opt-in, the default is again that inputs do not trigger keybindings

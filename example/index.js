@@ -1,8 +1,16 @@
 var React = require('react'),
-    Keybinding = require('../');
+    ReactDOM = require('react-dom'),
+    withKeybindings = require('../'),
+    createReactClass = require('create-react-class');
 
-var HelloMessage = React.createClass({
-  mixins: [Keybinding],
+var HelloMessage = withKeybindings(createReactClass({
+  render: function() {
+    return React.createElement("div", null, "Hello");
+  }
+}));
+
+ReactDOM.render(React.createElement(HelloMessage, {
+  name: "John",
   keybindings: {
     '⌘S': function(e) {
       console.log('save!');
@@ -15,9 +23,4 @@ var HelloMessage = React.createClass({
     // action is 'COPY'
     console.log(arguments);
   },
-  render: function() {
-    return React.createElement("div", null, "Hello");
-  }
-});
-
-React.render(React.createElement(HelloMessage, {name: "John"}), document.body);
+}), document.body);
